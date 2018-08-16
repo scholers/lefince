@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lefince.dao.AccountMapper" >
-  <resultMap id="BaseResultMap" type="com.lefince.entity.Account" >
-    <id column="account_id" property="accountId" jdbcType="INTEGER" />
-    <result column="phone" property="phone" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="cnname" property="cnname" jdbcType="VARCHAR" />
-    <result column="birthday_month" property="birthdayMonth" jdbcType="INTEGER" />
-    <result column="birthday_day" property="birthdayDay" jdbcType="INTEGER" />
-    <result column="birthday_year" property="birthdayYear" jdbcType="INTEGER" />
-    <result column="password" property="password" jdbcType="VARCHAR" />
-    <result column="wechart_id" property="wechartId" jdbcType="VARCHAR" />
-    <result column="alipay_id" property="alipayId" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefince.dao.AccountMapper">
+  <resultMap id="BaseResultMap" type="com.lefince.entity.Account">
+    <id column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cnname" jdbcType="VARCHAR" property="cnname" />
+    <result column="birthday_month" jdbcType="INTEGER" property="birthdayMonth" />
+    <result column="birthday_day" jdbcType="INTEGER" property="birthdayDay" />
+    <result column="birthday_year" jdbcType="INTEGER" property="birthdayYear" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="wechart_id" jdbcType="VARCHAR" property="wechartId" />
+    <result column="alipay_id" jdbcType="VARCHAR" property="alipayId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     account_id, phone, name, cnname, birthday_month, birthday_day, birthday_year, password, 
     wechart_id, alipay_id, create_time, update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from account
     where account_id = #{accountId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from account
     where account_id = #{accountId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lefince.entity.Account" >
+  <insert id="insert" parameterType="com.lefince.entity.Account">
     insert into account (account_id, phone, name, 
       cnname, birthday_month, birthday_day, 
       birthday_year, password, wechart_id, 
@@ -41,125 +41,298 @@
       #{alipayId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lefince.entity.Account" >
+  <insert id="insertSelective" parameterType="com.lefince.entity.Account">
     insert into account
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="accountId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
         account_id,
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         phone,
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name,
       </if>
-      <if test="cnname != null" >
+      <if test="cnname != null">
         cnname,
       </if>
-      <if test="birthdayMonth != null" >
+      <if test="birthdayMonth != null">
         birthday_month,
       </if>
-      <if test="birthdayDay != null" >
+      <if test="birthdayDay != null">
         birthday_day,
       </if>
-      <if test="birthdayYear != null" >
+      <if test="birthdayYear != null">
         birthday_year,
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password,
       </if>
-      <if test="wechartId != null" >
+      <if test="wechartId != null">
         wechart_id,
       </if>
-      <if test="alipayId != null" >
+      <if test="alipayId != null">
         alipay_id,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="accountId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
         #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="phone != null" >
+      <if test="phone != null">
         #{phone,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="cnname != null" >
+      <if test="cnname != null">
         #{cnname,jdbcType=VARCHAR},
       </if>
-      <if test="birthdayMonth != null" >
+      <if test="birthdayMonth != null">
         #{birthdayMonth,jdbcType=INTEGER},
       </if>
-      <if test="birthdayDay != null" >
+      <if test="birthdayDay != null">
         #{birthdayDay,jdbcType=INTEGER},
       </if>
-      <if test="birthdayYear != null" >
+      <if test="birthdayYear != null">
         #{birthdayYear,jdbcType=INTEGER},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="wechartId != null" >
+      <if test="wechartId != null">
         #{wechartId,jdbcType=VARCHAR},
       </if>
-      <if test="alipayId != null" >
+      <if test="alipayId != null">
         #{alipayId,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.Account" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.Account">
     update account
-    <set >
-      <if test="phone != null" >
+    <set>
+      <if test="phone != null">
         phone = #{phone,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
+      <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="cnname != null" >
+      <if test="cnname != null">
         cnname = #{cnname,jdbcType=VARCHAR},
       </if>
-      <if test="birthdayMonth != null" >
+      <if test="birthdayMonth != null">
         birthday_month = #{birthdayMonth,jdbcType=INTEGER},
       </if>
-      <if test="birthdayDay != null" >
+      <if test="birthdayDay != null">
         birthday_day = #{birthdayDay,jdbcType=INTEGER},
       </if>
-      <if test="birthdayYear != null" >
+      <if test="birthdayYear != null">
         birthday_year = #{birthdayYear,jdbcType=INTEGER},
       </if>
-      <if test="password != null" >
+      <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="wechartId != null" >
+      <if test="wechartId != null">
         wechart_id = #{wechartId,jdbcType=VARCHAR},
       </if>
-      <if test="alipayId != null" >
+      <if test="alipayId != null">
         alipay_id = #{alipayId,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Account" >
+  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Account">
+    update account
+    set phone = #{phone,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      cnname = #{cnname,jdbcType=VARCHAR},
+      birthday_month = #{birthdayMonth,jdbcType=INTEGER},
+      birthday_day = #{birthdayDay,jdbcType=INTEGER},
+      birthday_year = #{birthdayYear,jdbcType=INTEGER},
+      password = #{password,jdbcType=VARCHAR},
+      wechart_id = #{wechartId,jdbcType=VARCHAR},
+      alipay_id = #{alipayId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.lefince.entity.Account">
+    <id column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="cnname" jdbcType="VARCHAR" property="cnname" />
+    <result column="birthday_month" jdbcType="INTEGER" property="birthdayMonth" />
+    <result column="birthday_day" jdbcType="INTEGER" property="birthdayDay" />
+    <result column="birthday_year" jdbcType="INTEGER" property="birthdayYear" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="wechart_id" jdbcType="VARCHAR" property="wechartId" />
+    <result column="alipay_id" jdbcType="VARCHAR" property="alipayId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    account_id, phone, name, cnname, birthday_month, birthday_day, birthday_year, password, 
+    wechart_id, alipay_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from account
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from account
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefince.entity.Account">
+    insert into account (account_id, phone, name, 
+      cnname, birthday_month, birthday_day, 
+      birthday_year, password, wechart_id, 
+      alipay_id, create_time, update_time
+      )
+    values (#{accountId,jdbcType=INTEGER}, #{phone,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{cnname,jdbcType=VARCHAR}, #{birthdayMonth,jdbcType=INTEGER}, #{birthdayDay,jdbcType=INTEGER}, 
+      #{birthdayYear,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{wechartId,jdbcType=VARCHAR}, 
+      #{alipayId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefince.entity.Account">
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="cnname != null">
+        cnname,
+      </if>
+      <if test="birthdayMonth != null">
+        birthday_month,
+      </if>
+      <if test="birthdayDay != null">
+        birthday_day,
+      </if>
+      <if test="birthdayYear != null">
+        birthday_year,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="wechartId != null">
+        wechart_id,
+      </if>
+      <if test="alipayId != null">
+        alipay_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cnname != null">
+        #{cnname,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdayMonth != null">
+        #{birthdayMonth,jdbcType=INTEGER},
+      </if>
+      <if test="birthdayDay != null">
+        #{birthdayDay,jdbcType=INTEGER},
+      </if>
+      <if test="birthdayYear != null">
+        #{birthdayYear,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="wechartId != null">
+        #{wechartId,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayId != null">
+        #{alipayId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.Account">
+    update account
+    <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="cnname != null">
+        cnname = #{cnname,jdbcType=VARCHAR},
+      </if>
+      <if test="birthdayMonth != null">
+        birthday_month = #{birthdayMonth,jdbcType=INTEGER},
+      </if>
+      <if test="birthdayDay != null">
+        birthday_day = #{birthdayDay,jdbcType=INTEGER},
+      </if>
+      <if test="birthdayYear != null">
+        birthday_year = #{birthdayYear,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="wechartId != null">
+        wechart_id = #{wechartId,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayId != null">
+        alipay_id = #{alipayId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Account">
     update account
     set phone = #{phone,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
