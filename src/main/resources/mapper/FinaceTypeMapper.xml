@@ -1,28 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lefince.dao.FinaceTypeMapper">
-  <resultMap id="BaseResultMap" type="com.lefince.entity.FinaceType">
-    <id column="fintype_id" jdbcType="INTEGER" property="fintypeId" />
-    <result column="finace_code" jdbcType="VARCHAR" property="finaceCode" />
-    <result column="finace_name" jdbcType="VARCHAR" property="finaceName" />
-    <result column="risk_level" jdbcType="VARCHAR" property="riskLevel" />
-    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lefince.dao.FinaceTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.lefince.entity.FinaceType" >
+    <id column="fintype_id" property="fintypeId" jdbcType="INTEGER" />
+    <result column="finace_code" property="finaceCode" jdbcType="VARCHAR" />
+    <result column="finace_name" property="finaceName" jdbcType="VARCHAR" />
+    <result column="risk_level" property="riskLevel" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     fintype_id, finace_code, finace_name, risk_level, update_time, create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from finacetype
     where fintype_id = #{fintypeId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from finacetype
     where fintype_id = #{fintypeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lefince.entity.FinaceType">
+  <insert id="insert" parameterType="com.lefince.entity.FinaceType" >
     insert into finacetype (fintype_id, finace_code, finace_name, 
       risk_level, update_time, create_time
       )
@@ -30,173 +30,71 @@
       #{riskLevel,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lefince.entity.FinaceType">
+  <insert id="insertSelective" parameterType="com.lefince.entity.FinaceType" >
     insert into finacetype
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="fintypeId != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fintypeId != null" >
         fintype_id,
       </if>
-      <if test="finaceCode != null">
+      <if test="finaceCode != null" >
         finace_code,
       </if>
-      <if test="finaceName != null">
+      <if test="finaceName != null" >
         finace_name,
       </if>
-      <if test="riskLevel != null">
+      <if test="riskLevel != null" >
         risk_level,
       </if>
-      <if test="updateTime != null">
+      <if test="updateTime != null" >
         update_time,
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         create_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="fintypeId != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fintypeId != null" >
         #{fintypeId,jdbcType=INTEGER},
       </if>
-      <if test="finaceCode != null">
+      <if test="finaceCode != null" >
         #{finaceCode,jdbcType=VARCHAR},
       </if>
-      <if test="finaceName != null">
+      <if test="finaceName != null" >
         #{finaceName,jdbcType=VARCHAR},
       </if>
-      <if test="riskLevel != null">
+      <if test="riskLevel != null" >
         #{riskLevel,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
+      <if test="updateTime != null" >
         #{updateTime,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         #{createTime,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.FinaceType">
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.FinaceType" >
     update finacetype
-    <set>
-      <if test="finaceCode != null">
+    <set >
+      <if test="finaceCode != null" >
         finace_code = #{finaceCode,jdbcType=VARCHAR},
       </if>
-      <if test="finaceName != null">
+      <if test="finaceName != null" >
         finace_name = #{finaceName,jdbcType=VARCHAR},
       </if>
-      <if test="riskLevel != null">
+      <if test="riskLevel != null" >
         risk_level = #{riskLevel,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
+      <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         create_time = #{createTime,jdbcType=VARCHAR},
       </if>
     </set>
     where fintype_id = #{fintypeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.FinaceType">
-    update finacetype
-    set finace_code = #{finaceCode,jdbcType=VARCHAR},
-      finace_name = #{finaceName,jdbcType=VARCHAR},
-      risk_level = #{riskLevel,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR}
-    where fintype_id = #{fintypeId,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.lefince.entity.FinaceType">
-    <id column="fintype_id" jdbcType="INTEGER" property="fintypeId" />
-    <result column="finace_code" jdbcType="VARCHAR" property="finaceCode" />
-    <result column="finace_name" jdbcType="VARCHAR" property="finaceName" />
-    <result column="risk_level" jdbcType="VARCHAR" property="riskLevel" />
-    <result column="update_time" jdbcType="VARCHAR" property="updateTime" />
-    <result column="create_time" jdbcType="VARCHAR" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    fintype_id, finace_code, finace_name, risk_level, update_time, create_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from finacetype
-    where fintype_id = #{fintypeId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from finacetype
-    where fintype_id = #{fintypeId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.lefince.entity.FinaceType">
-    insert into finacetype (fintype_id, finace_code, finace_name, 
-      risk_level, update_time, create_time
-      )
-    values (#{fintypeId,jdbcType=INTEGER}, #{finaceCode,jdbcType=VARCHAR}, #{finaceName,jdbcType=VARCHAR}, 
-      #{riskLevel,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.lefince.entity.FinaceType">
-    insert into finacetype
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="fintypeId != null">
-        fintype_id,
-      </if>
-      <if test="finaceCode != null">
-        finace_code,
-      </if>
-      <if test="finaceName != null">
-        finace_name,
-      </if>
-      <if test="riskLevel != null">
-        risk_level,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="fintypeId != null">
-        #{fintypeId,jdbcType=INTEGER},
-      </if>
-      <if test="finaceCode != null">
-        #{finaceCode,jdbcType=VARCHAR},
-      </if>
-      <if test="finaceName != null">
-        #{finaceName,jdbcType=VARCHAR},
-      </if>
-      <if test="riskLevel != null">
-        #{riskLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.FinaceType">
-    update finacetype
-    <set>
-      <if test="finaceCode != null">
-        finace_code = #{finaceCode,jdbcType=VARCHAR},
-      </if>
-      <if test="finaceName != null">
-        finace_name = #{finaceName,jdbcType=VARCHAR},
-      </if>
-      <if test="riskLevel != null">
-        risk_level = #{riskLevel,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where fintype_id = #{fintypeId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.FinaceType">
+  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.FinaceType" >
     update finacetype
     set finace_code = #{finaceCode,jdbcType=VARCHAR},
       finace_name = #{finaceName,jdbcType=VARCHAR},

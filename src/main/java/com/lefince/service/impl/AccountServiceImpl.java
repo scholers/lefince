@@ -8,10 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
- * Created by lefince on 2018/3/16.
+ *
  */
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -20,8 +19,8 @@ public class AccountServiceImpl implements AccountService {
     private AccountMapper accountMapper;
 
     @Override
-    public boolean deleteByPrimaryKey(Integer areaId) {
-        int deleteCount = accountMapper.deleteByPrimaryKey(areaId);
+    public boolean deleteByPrimaryKey(Integer accountId) {
+        int deleteCount = accountMapper.deleteByPrimaryKey(accountId);
         if(deleteCount>0){
             return true;
         }else {

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -32,15 +33,25 @@ public class SqlSessionFacoryConfiguration {
     private DataSource dataSource;
 
 
-    @Bean("sqlSessionFactory")
-    public SqlSessionFactoryBean creatSqlSessionFactory() throws IOException {
+    /**
+            * 创建sqlSessionFactoryBean 实例  并且设置configtion  设置mapper映射路径
+     * <p>
+     * 设置dataSource数据源
+     */
+    @Bean(name = "sqlSessionFactory")
+    public SqlSessionFactoryBean createSqlSessionFactoryBean() throws IOException {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        //设置mybatis configuration扫描路径
         sqlSessionFactoryBean.setConfigLocation(new ClassPathResource(mybatisConfigPath));
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        String packSearchPath = PathMatchingResourcePatternResolver.CLASSPATH_URL_PREFIX;
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(packSearchPath+mapperPath));
-        sqlSessionFactoryBean.setTypeAliasesPackage(entityPackage);
+        //添加mapper扫描路径
+        PathMatchingResourcePatternResolver pathMatchingResourcePatternResolver = new PathMatchingResourcePatternResolver();
+        String packageSearchPath = ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + mapperPath;
+        sqlSessionFactoryBean.setMapperLocations(pathMatchingResourcePatternResolver.getResources(packageSearchPath));
+        //设置DataSource
         sqlSessionFactoryBean.setDataSource(dataSource);
+        //设置entityPackage包扫描路径
+        sqlSessionFactoryBean.setTypeAliasesPackage(entityPackage);
+
         return sqlSessionFactoryBean;
     }
 
