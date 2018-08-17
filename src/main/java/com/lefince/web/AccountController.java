@@ -1,7 +1,7 @@
 package com.lefince.web;
 
-import com.lefince.entity.TbArea;
-import com.lefince.service.AreaService;
+import com.lefince.entity.Account;
+import com.lefince.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,10 +16,10 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/superadmin")
-public class AreaController {
+public class AccountController {
 
     @Autowired
-    private AreaService areaService;
+    private AccountService accountService;
 
     /**
      * 列表查询
@@ -29,8 +28,10 @@ public class AreaController {
     @RequestMapping(value = "/listarea",method = RequestMethod.GET)
     private Map<String, Object> listArea() {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        List<TbArea> areas = areaService.queryArea();
-        modelMap.put("areaList", areas);
+        /*
+        List<Account> areas = accountService.queryArea();
+        */
+       // modelMap.put("areaList", areas);
         return modelMap;
     }
 
@@ -42,7 +43,7 @@ public class AreaController {
     @RequestMapping(value = "/getareabyid",method = RequestMethod.GET)
     private Map<String, Object> getAreaById(Integer areaId) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        TbArea area = areaService.selectByPrimaryKey(areaId);
+        Account area = accountService.selectByPrimaryKey(areaId);
         modelMap.put("area", area);
         return modelMap;
     }
@@ -53,9 +54,9 @@ public class AreaController {
      * @return
      */
     @RequestMapping(value = "/addarea",method = RequestMethod.POST)
-    private Map<String, Object> addArea(@RequestBody TbArea area) {
+    private Map<String, Object> addArea(@RequestBody Account area) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        boolean isSuccess = areaService.insert(area);
+        boolean isSuccess = accountService.insert(area);
         modelMap.put("success", isSuccess);
         return modelMap;
     }
@@ -66,9 +67,9 @@ public class AreaController {
      * @return
      */
     @RequestMapping(value = "/modifyarea",method = RequestMethod.POST)
-    private Map<String, Object> modifyArea(@RequestBody TbArea area) {
+    private Map<String, Object> modifyArea(@RequestBody Account area) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        boolean b = areaService.updateByPrimaryKeySelective(area);
+        boolean b = accountService.updateByPrimaryKeySelective(area);
         modelMap.put("success", b);
         return modelMap;
     }
@@ -81,7 +82,7 @@ public class AreaController {
     @RequestMapping(value = "/removearea",method = RequestMethod.GET)
     private Map<String, Object> removeArea(Integer areaId) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        boolean isSuccess = areaService.deleteByPrimaryKey(areaId);
+        boolean isSuccess = accountService.deleteByPrimaryKey(areaId);
         modelMap.put("success", isSuccess);
         return modelMap;
     }

@@ -1,8 +1,8 @@
 package com.lefince.service.impl;
 
-import com.lefince.dao.TbAreaMapper;
-import com.lefince.entity.TbArea;
-import com.lefince.service.AreaService;
+import com.lefince.dao.AccountMapper;
+import com.lefince.entity.Account;
+import com.lefince.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,14 +14,14 @@ import java.util.List;
  * Created by lefince on 2018/3/16.
  */
 @Service
-public class AreaServiceImpl implements AreaService {
+public class AccountServiceImpl implements AccountService {
 
     @Autowired
-    private TbAreaMapper areaMapper;
+    private AccountMapper accountMapper;
 
     @Override
     public boolean deleteByPrimaryKey(Integer areaId) {
-        int deleteCount = areaMapper.deleteByPrimaryKey(areaId);
+        int deleteCount = accountMapper.deleteByPrimaryKey(areaId);
         if(deleteCount>0){
             return true;
         }else {
@@ -31,12 +31,12 @@ public class AreaServiceImpl implements AreaService {
 
     @Transactional
     @Override
-    public boolean insert(TbArea area) {
-        if (area.getAreaName()!=null && !"".equals(area.getAreaName())) {
-            area.setCreateTime(new Date());
-            area.setUpdateTime(new Date());
+    public boolean insert(Account account) {
+        if (account.getPhone()!=null && !"".equals(account.getPhone())) {
+            account.setCreateTime(new Date());
+            account.setUpdateTime(new Date());
             try {
-                int insertCount = areaMapper.insert(area);
+                int insertCount = accountMapper.insert(account);
                 if (insertCount > 0) {
                     return true;
                 } else {
@@ -51,21 +51,21 @@ public class AreaServiceImpl implements AreaService {
     }
 
     @Override
-    public int insertSelective(TbArea record) {
-        return areaMapper.insertSelective(record);
+    public int insertSelective(Account record) {
+        return accountMapper.insertSelective(record);
     }
 
     @Override
-    public TbArea selectByPrimaryKey(Integer areaId) {
-        return areaMapper.selectByPrimaryKey(areaId);
+    public Account selectByPrimaryKey(Integer areaId) {
+        return accountMapper.selectByPrimaryKey(areaId);
     }
 
     @Override
-    public boolean updateByPrimaryKeySelective(TbArea record) {
-        if (record.getAreaName()!=null && !"".equals(record.getAreaName())) {
+    public boolean updateByPrimaryKeySelective(Account record) {
+        if (record.getAccountId()!=null && !"".equals(record.getAccountId())) {
             record.setUpdateTime(new Date());
             try {
-                int updateCount = areaMapper.updateByPrimaryKeySelective(record);
+                int updateCount = accountMapper.updateByPrimaryKeySelective(record);
                 if (updateCount > 0) {
                     return true;
                 } else {
@@ -80,12 +80,14 @@ public class AreaServiceImpl implements AreaService {
     }
 
     @Override
-    public int updateByPrimaryKey(TbArea record) {
-        return areaMapper.updateByPrimaryKey(record);
+    public int updateByPrimaryKey(Account record) {
+        return accountMapper.updateByPrimaryKey(record);
     }
 
+    /*
     @Override
-    public List<TbArea> queryArea() {
-        return areaMapper.queryArea();
+    public List<Account> queryArea() {
+        return accountMapper.
     }
+    */
 }

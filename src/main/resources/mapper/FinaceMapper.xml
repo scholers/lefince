@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lefince.dao.FinaceMapper" >
-  <resultMap id="BaseResultMap" type="com.lefince.entity.Finace" >
-    <id column="finace_id" property="finaceId" jdbcType="INTEGER" />
-    <result column="account_id" property="accountId" jdbcType="INTEGER" />
-    <result column="out_type" property="outType" jdbcType="VARCHAR" />
-    <result column="finace_type" property="finaceType" jdbcType="VARCHAR" />
-    <result column="finace_code" property="finaceCode" jdbcType="VARCHAR" />
-    <result column="finace_name" property="finaceName" jdbcType="VARCHAR" />
-    <result column="pincipal_monty" property="pincipalMonty" jdbcType="INTEGER" />
-    <result column="benefit_money" property="benefitMoney" jdbcType="INTEGER" />
-    <result column="benefit_type" property="benefitType" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="demo" property="demo" jdbcType="VARCHAR" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lefince.dao.FinaceMapper">
+  <resultMap id="BaseResultMap" type="com.lefince.entity.Finace">
+    <id column="finace_id" jdbcType="INTEGER" property="finaceId" />
+    <result column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="out_type" jdbcType="VARCHAR" property="outType" />
+    <result column="finace_type" jdbcType="VARCHAR" property="finaceType" />
+    <result column="finace_code" jdbcType="VARCHAR" property="finaceCode" />
+    <result column="finace_name" jdbcType="VARCHAR" property="finaceName" />
+    <result column="pincipal_monty" jdbcType="INTEGER" property="pincipalMonty" />
+    <result column="benefit_money" jdbcType="INTEGER" property="benefitMoney" />
+    <result column="benefit_type" jdbcType="VARCHAR" property="benefitType" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="demo" jdbcType="VARCHAR" property="demo" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     finace_id, account_id, out_type, finace_type, finace_code, finace_name, pincipal_monty, 
     benefit_money, benefit_type, update_time, create_time, demo
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from finace
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from finace
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.lefince.entity.Finace" >
+  <insert id="insert" parameterType="com.lefince.entity.Finace">
     insert into finace (finace_id, account_id, out_type, 
       finace_type, finace_code, finace_name, 
       pincipal_monty, benefit_money, benefit_type, 
@@ -41,125 +41,298 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{demo,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.lefince.entity.Finace" >
+  <insert id="insertSelective" parameterType="com.lefince.entity.Finace">
     insert into finace
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="finaceId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="finaceId != null">
         finace_id,
       </if>
-      <if test="accountId != null" >
+      <if test="accountId != null">
         account_id,
       </if>
-      <if test="outType != null" >
+      <if test="outType != null">
         out_type,
       </if>
-      <if test="finaceType != null" >
+      <if test="finaceType != null">
         finace_type,
       </if>
-      <if test="finaceCode != null" >
+      <if test="finaceCode != null">
         finace_code,
       </if>
-      <if test="finaceName != null" >
+      <if test="finaceName != null">
         finace_name,
       </if>
-      <if test="pincipalMonty != null" >
+      <if test="pincipalMonty != null">
         pincipal_monty,
       </if>
-      <if test="benefitMoney != null" >
+      <if test="benefitMoney != null">
         benefit_money,
       </if>
-      <if test="benefitType != null" >
+      <if test="benefitType != null">
         benefit_type,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="demo != null" >
+      <if test="demo != null">
         demo,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="finaceId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="finaceId != null">
         #{finaceId,jdbcType=INTEGER},
       </if>
-      <if test="accountId != null" >
+      <if test="accountId != null">
         #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="outType != null" >
+      <if test="outType != null">
         #{outType,jdbcType=VARCHAR},
       </if>
-      <if test="finaceType != null" >
+      <if test="finaceType != null">
         #{finaceType,jdbcType=VARCHAR},
       </if>
-      <if test="finaceCode != null" >
+      <if test="finaceCode != null">
         #{finaceCode,jdbcType=VARCHAR},
       </if>
-      <if test="finaceName != null" >
+      <if test="finaceName != null">
         #{finaceName,jdbcType=VARCHAR},
       </if>
-      <if test="pincipalMonty != null" >
+      <if test="pincipalMonty != null">
         #{pincipalMonty,jdbcType=INTEGER},
       </if>
-      <if test="benefitMoney != null" >
+      <if test="benefitMoney != null">
         #{benefitMoney,jdbcType=INTEGER},
       </if>
-      <if test="benefitType != null" >
+      <if test="benefitType != null">
         #{benefitType,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="demo != null" >
+      <if test="demo != null">
         #{demo,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.Finace" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.Finace">
     update finace
-    <set >
-      <if test="accountId != null" >
+    <set>
+      <if test="accountId != null">
         account_id = #{accountId,jdbcType=INTEGER},
       </if>
-      <if test="outType != null" >
+      <if test="outType != null">
         out_type = #{outType,jdbcType=VARCHAR},
       </if>
-      <if test="finaceType != null" >
+      <if test="finaceType != null">
         finace_type = #{finaceType,jdbcType=VARCHAR},
       </if>
-      <if test="finaceCode != null" >
+      <if test="finaceCode != null">
         finace_code = #{finaceCode,jdbcType=VARCHAR},
       </if>
-      <if test="finaceName != null" >
+      <if test="finaceName != null">
         finace_name = #{finaceName,jdbcType=VARCHAR},
       </if>
-      <if test="pincipalMonty != null" >
+      <if test="pincipalMonty != null">
         pincipal_monty = #{pincipalMonty,jdbcType=INTEGER},
       </if>
-      <if test="benefitMoney != null" >
+      <if test="benefitMoney != null">
         benefit_money = #{benefitMoney,jdbcType=INTEGER},
       </if>
-      <if test="benefitType != null" >
+      <if test="benefitType != null">
         benefit_type = #{benefitType,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="demo != null" >
+      <if test="demo != null">
         demo = #{demo,jdbcType=VARCHAR},
       </if>
     </set>
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Finace" >
+  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Finace">
+    update finace
+    set account_id = #{accountId,jdbcType=INTEGER},
+      out_type = #{outType,jdbcType=VARCHAR},
+      finace_type = #{finaceType,jdbcType=VARCHAR},
+      finace_code = #{finaceCode,jdbcType=VARCHAR},
+      finace_name = #{finaceName,jdbcType=VARCHAR},
+      pincipal_monty = #{pincipalMonty,jdbcType=INTEGER},
+      benefit_money = #{benefitMoney,jdbcType=INTEGER},
+      benefit_type = #{benefitType,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      demo = #{demo,jdbcType=VARCHAR}
+    where finace_id = #{finaceId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.lefince.entity.Finace">
+    <id column="finace_id" jdbcType="INTEGER" property="finaceId" />
+    <result column="account_id" jdbcType="INTEGER" property="accountId" />
+    <result column="out_type" jdbcType="VARCHAR" property="outType" />
+    <result column="finace_type" jdbcType="VARCHAR" property="finaceType" />
+    <result column="finace_code" jdbcType="VARCHAR" property="finaceCode" />
+    <result column="finace_name" jdbcType="VARCHAR" property="finaceName" />
+    <result column="pincipal_monty" jdbcType="INTEGER" property="pincipalMonty" />
+    <result column="benefit_money" jdbcType="INTEGER" property="benefitMoney" />
+    <result column="benefit_type" jdbcType="VARCHAR" property="benefitType" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="demo" jdbcType="VARCHAR" property="demo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    finace_id, account_id, out_type, finace_type, finace_code, finace_name, pincipal_monty, 
+    benefit_money, benefit_type, update_time, create_time, demo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from finace
+    where finace_id = #{finaceId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from finace
+    where finace_id = #{finaceId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lefince.entity.Finace">
+    insert into finace (finace_id, account_id, out_type, 
+      finace_type, finace_code, finace_name, 
+      pincipal_monty, benefit_money, benefit_type, 
+      update_time, create_time, demo
+      )
+    values (#{finaceId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{outType,jdbcType=VARCHAR}, 
+      #{finaceType,jdbcType=VARCHAR}, #{finaceCode,jdbcType=VARCHAR}, #{finaceName,jdbcType=VARCHAR}, 
+      #{pincipalMonty,jdbcType=INTEGER}, #{benefitMoney,jdbcType=INTEGER}, #{benefitType,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{demo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lefince.entity.Finace">
+    insert into finace
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="finaceId != null">
+        finace_id,
+      </if>
+      <if test="accountId != null">
+        account_id,
+      </if>
+      <if test="outType != null">
+        out_type,
+      </if>
+      <if test="finaceType != null">
+        finace_type,
+      </if>
+      <if test="finaceCode != null">
+        finace_code,
+      </if>
+      <if test="finaceName != null">
+        finace_name,
+      </if>
+      <if test="pincipalMonty != null">
+        pincipal_monty,
+      </if>
+      <if test="benefitMoney != null">
+        benefit_money,
+      </if>
+      <if test="benefitType != null">
+        benefit_type,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="demo != null">
+        demo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="finaceId != null">
+        #{finaceId,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="outType != null">
+        #{outType,jdbcType=VARCHAR},
+      </if>
+      <if test="finaceType != null">
+        #{finaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="finaceCode != null">
+        #{finaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="finaceName != null">
+        #{finaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="pincipalMonty != null">
+        #{pincipalMonty,jdbcType=INTEGER},
+      </if>
+      <if test="benefitMoney != null">
+        #{benefitMoney,jdbcType=INTEGER},
+      </if>
+      <if test="benefitType != null">
+        #{benefitType,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="demo != null">
+        #{demo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lefince.entity.Finace">
+    update finace
+    <set>
+      <if test="accountId != null">
+        account_id = #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="outType != null">
+        out_type = #{outType,jdbcType=VARCHAR},
+      </if>
+      <if test="finaceType != null">
+        finace_type = #{finaceType,jdbcType=VARCHAR},
+      </if>
+      <if test="finaceCode != null">
+        finace_code = #{finaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="finaceName != null">
+        finace_name = #{finaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="pincipalMonty != null">
+        pincipal_monty = #{pincipalMonty,jdbcType=INTEGER},
+      </if>
+      <if test="benefitMoney != null">
+        benefit_money = #{benefitMoney,jdbcType=INTEGER},
+      </if>
+      <if test="benefitType != null">
+        benefit_type = #{benefitType,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="demo != null">
+        demo = #{demo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where finace_id = #{finaceId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Finace">
     update finace
     set account_id = #{accountId,jdbcType=INTEGER},
       out_type = #{outType,jdbcType=VARCHAR},
