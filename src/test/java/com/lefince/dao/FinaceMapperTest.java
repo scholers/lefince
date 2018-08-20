@@ -46,10 +46,9 @@ public class FinaceMapperTest {
         finace.setBenefitType("tetsttype");
         finace.setOutType("out");
         finace.setPincipalMonty(-122);
-        finace.setUpdateTime(new Date());
-        finace.setCreateTime(new Date());
 
-        finaceMapper.insert(finace);
+        int irturn = finaceMapper.insert(finace);
+        Assert.isTrue(irturn > 0, "插入失败！");
     }
 
     @Test

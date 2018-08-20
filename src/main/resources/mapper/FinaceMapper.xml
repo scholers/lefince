@@ -153,8 +153,7 @@
         demo = #{demo,jdbcType=VARCHAR},
       </if>
 
-      update_time = now(),
-      create_time = now()
+      update_time = now()
     </set>
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </update>
@@ -169,7 +168,6 @@
       benefit_money = #{benefitMoney,jdbcType=INTEGER},
       benefit_type = #{benefitType,jdbcType=VARCHAR},
       update_time = now(),
-      create_time = now(),
       demo = #{demo,jdbcType=VARCHAR}
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </update>

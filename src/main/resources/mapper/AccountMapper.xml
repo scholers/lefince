@@ -150,9 +150,6 @@
       <if test="alipayId != null" >
         alipay_id = #{alipayId,jdbcType=VARCHAR},
       </if>
-
-        create_time = now(),
-
         update_time = now()
 
     </set>
@@ -169,7 +166,6 @@
       password = #{password,jdbcType=VARCHAR},
       wechart_id = #{wechartId,jdbcType=VARCHAR},
       alipay_id = #{alipayId,jdbcType=VARCHAR},
-      create_time = now(),
       update_time = now()
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>

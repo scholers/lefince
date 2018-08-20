@@ -27,7 +27,7 @@
       risk_level, update_time, create_time
       )
     values (#{fintypeId,jdbcType=INTEGER}, #{finaceCode,jdbcType=VARCHAR}, #{finaceName,jdbcType=VARCHAR}, 
-      #{riskLevel,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}
+      #{riskLevel,jdbcType=VARCHAR}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lefince.entity.FinaceType" >
@@ -85,12 +85,9 @@
       <if test="riskLevel != null" >
         risk_level = #{riskLevel,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=VARCHAR},
-      </if>
+
+        update_time = now()
+
     </set>
     where fintype_id = #{fintypeId,jdbcType=INTEGER}
   </update>
@@ -99,8 +96,7 @@
     set finace_code = #{finaceCode,jdbcType=VARCHAR},
       finace_name = #{finaceName,jdbcType=VARCHAR},
       risk_level = #{riskLevel,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=VARCHAR}
+      update_time = now()
     where fintype_id = #{fintypeId,jdbcType=INTEGER}
   </update>
 </mapper>
