@@ -29,7 +29,7 @@ public class AccountServiceImplTest {
         account.setPassword("123456");
         account.setCnname("liqingfeng");
         account.setName("dsdfsdf");
-        account.setPhone(11);
+        account.setPhone("13989801044");
         account.setUpdateTime(new Date());
         account.setCreateTime(new Date());
         account.setBirthdayMonth(11);

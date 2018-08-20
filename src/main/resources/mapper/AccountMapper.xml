@@ -3,7 +3,7 @@
 <mapper namespace="com.lefince.dao.AccountMapper" >
   <resultMap id="BaseResultMap" type="com.lefince.entity.Account" >
     <id column="account_id" property="accountId" jdbcType="INTEGER" />
-    <result column="phone" property="phone" jdbcType="INTEGER" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="cnname" property="cnname" jdbcType="VARCHAR" />
     <result column="birthday_month" property="birthdayMonth" jdbcType="INTEGER" />
@@ -35,10 +35,10 @@
       birthday_year, password, wechart_id, 
       alipay_id, create_time, update_time
       )
-    values (#{accountId,jdbcType=INTEGER}, #{phone,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    values (#{accountId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{cnname,jdbcType=VARCHAR}, #{birthdayMonth,jdbcType=INTEGER}, #{birthdayDay,jdbcType=INTEGER}, 
       #{birthdayYear,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{wechartId,jdbcType=VARCHAR}, 
-      #{alipayId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      #{alipayId,jdbcType=VARCHAR}, now(), now()
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lefince.entity.Account" >
@@ -86,7 +86,7 @@
         #{accountId,jdbcType=INTEGER},
       </if>
       <if test="phone != null" >
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -124,7 +124,7 @@
     update account
     <set >
       <if test="phone != null" >
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -150,18 +150,17 @@
       <if test="alipayId != null" >
         alipay_id = #{alipayId,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+
+        create_time = now(),
+
+        update_time = now()
+
     </set>
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lefince.entity.Account" >
     update account
-    set phone = #{phone,jdbcType=INTEGER},
+    set phone = #{phone,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       cnname = #{cnname,jdbcType=VARCHAR},
       birthday_month = #{birthdayMonth,jdbcType=INTEGER},
@@ -170,8 +169,8 @@
       password = #{password,jdbcType=VARCHAR},
       wechart_id = #{wechartId,jdbcType=VARCHAR},
       alipay_id = #{alipayId,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      create_time = now(),
+      update_time = now()
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>
 </mapper>

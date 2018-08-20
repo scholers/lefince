@@ -38,7 +38,7 @@
     values (#{finaceId,jdbcType=INTEGER}, #{accountId,jdbcType=INTEGER}, #{outType,jdbcType=VARCHAR}, 
       #{finaceType,jdbcType=VARCHAR}, #{finaceCode,jdbcType=VARCHAR}, #{finaceName,jdbcType=VARCHAR}, 
       #{pincipalMonty,jdbcType=INTEGER}, #{benefitMoney,jdbcType=INTEGER}, #{benefitType,jdbcType=VARCHAR}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{demo,jdbcType=VARCHAR}
+      now(), now(), #{demo,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.lefince.entity.Finace" >
@@ -147,15 +147,14 @@
       <if test="benefitType != null" >
         benefit_type = #{benefitType,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
+
+
       <if test="demo != null" >
         demo = #{demo,jdbcType=VARCHAR},
       </if>
+
+      update_time = now(),
+      create_time = now()
     </set>
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </update>
@@ -169,8 +168,8 @@
       pincipal_monty = #{pincipalMonty,jdbcType=INTEGER},
       benefit_money = #{benefitMoney,jdbcType=INTEGER},
       benefit_type = #{benefitType,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now(),
+      create_time = now(),
       demo = #{demo,jdbcType=VARCHAR}
     where finace_id = #{finaceId,jdbcType=INTEGER}
   </update>
