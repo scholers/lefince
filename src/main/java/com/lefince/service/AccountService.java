@@ -7,8 +7,6 @@ import com.lefince.entity.Account;
  */
 public interface AccountService {
 
-    boolean deleteByPrimaryKey(Integer accountId);
-
     boolean insert(Account record);
 
     int insertSelective(Account record);
@@ -19,7 +17,4 @@ public interface AccountService {
 
     int updateByPrimaryKey(Account record);
 
-    /*
-    List<TbArea> queryArea();
-    */
 }

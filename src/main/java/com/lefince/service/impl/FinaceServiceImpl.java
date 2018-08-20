@@ -1,20 +1,24 @@
 package com.lefince.service.impl;
 
-import com.lefince.dao.AccountMapper;
-import com.lefince.entity.Account;
-import com.lefince.service.AccountService;
+import com.lefince.dao.FinaceMapper;
+import com.lefince.entity.Finace;
+import com.lefince.service.FinaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
-public class FinaceServiceImpl implements AccountService {
+/**
+ *
+ */
+public class FinaceServiceImpl implements FinaceService {
     @Autowired
-    private AccountMapper accountMapper;
+    private FinaceMapper finaceMapper;
 
     @Override
-    public boolean deleteByPrimaryKey(Integer accountId) {
-        int deleteCount = accountMapper.deleteByPrimaryKey(accountId);
+    public boolean deleteByPrimaryKey(Integer finaceId) {
+        int deleteCount = finaceMapper.deleteByPrimaryKey(finaceId);
         if(deleteCount>0){
             return true;
         }else {
@@ -24,12 +28,10 @@ public class FinaceServiceImpl implements AccountService {
 
     @Transactional
     @Override
-    public boolean insert(Account account) {
-        if (account.getPhone()!=null && !"".equals(account.getPhone())) {
-            account.setCreateTime(new Date());
-            account.setUpdateTime(new Date());
+    public boolean insert(Finace finace) {
+        if (finace.getBenefitMoney()!=null && !"".equals(finace.getBenefitMoney())) {
             try {
-                int insertCount = accountMapper.insert(account);
+                int insertCount = finaceMapper.insert(finace);
                 if (insertCount > 0) {
                     return true;
                 } else {
@@ -39,26 +41,26 @@ public class FinaceServiceImpl implements AccountService {
                 throw new RuntimeException("插入失败"+ e.getMessage());
             }
         }else {
-            throw new RuntimeException("区域信息不能为空");
+            throw new RuntimeException("投入本金不能为空");
         }
     }
 
     @Override
-    public int insertSelective(Account record) {
-        return accountMapper.insertSelective(record);
+    public int insertSelective(Finace record) {
+        return finaceMapper.insertSelective(record);
     }
 
     @Override
-    public Account selectByPrimaryKey(Integer areaId) {
-        return accountMapper.selectByPrimaryKey(areaId);
+    public Finace selectByPrimaryKey(Integer finaceId) {
+        return finaceMapper.selectByPrimaryKey(finaceId);
     }
 
     @Override
-    public boolean updateByPrimaryKeySelective(Account record) {
+    public boolean updateByPrimaryKeySelective(Finace record) {
         if (record.getAccountId()!=null && !"".equals(record.getAccountId())) {
             record.setUpdateTime(new Date());
             try {
-                int updateCount = accountMapper.updateByPrimaryKeySelective(record);
+                int updateCount = finaceMapper.updateByPrimaryKeySelective(record);
                 if (updateCount > 0) {
                     return true;
                 } else {
@@ -72,16 +74,12 @@ public class FinaceServiceImpl implements AccountService {
         }
     }
 
+
+
     @Override
-    public int updateByPrimaryKey(Account record) {
-        return accountMapper.updateByPrimaryKey(record);
+    public List<Finace> queryFinace(Integer accountId) {
+        return finaceMapper.queryFinace(accountId);
     }
 
-    /*
-    @Override
-    public List<Account> queryArea() {
-        return accountMapper.
-    }
-    */
 }
 

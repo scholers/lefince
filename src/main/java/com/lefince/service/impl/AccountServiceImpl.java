@@ -18,22 +18,11 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
-    @Override
-    public boolean deleteByPrimaryKey(Integer accountId) {
-        int deleteCount = accountMapper.deleteByPrimaryKey(accountId);
-        if(deleteCount>0){
-            return true;
-        }else {
-            return false;
-        }
-    }
 
     @Transactional
     @Override
     public boolean insert(Account account) {
         if (account.getPhone()!=null && !"".equals(account.getPhone())) {
-            account.setCreateTime(new Date());
-            account.setUpdateTime(new Date());
             try {
                 int insertCount = accountMapper.insert(account);
                 if (insertCount > 0) {
@@ -45,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
                 throw new RuntimeException("插入失败"+ e.getMessage());
             }
         }else {
-            throw new RuntimeException("区域信息不能为空");
+            throw new RuntimeException("手机号码不能为空");
         }
     }
 
@@ -74,7 +63,7 @@ public class AccountServiceImpl implements AccountService {
                 throw new RuntimeException("更新失败"+ e.getMessage());
             }
         }else {
-            throw new RuntimeException("区域信息不能为空");
+            throw new RuntimeException("手机号码不能为空");
         }
     }
 
@@ -83,10 +72,5 @@ public class AccountServiceImpl implements AccountService {
         return accountMapper.updateByPrimaryKey(record);
     }
 
-    /*
-    @Override
-    public List<Account> queryArea() {
-        return accountMapper.
-    }
-    */
+
 }

@@ -1,22 +1,26 @@
 package com.lefince.service;
 
-import com.lefince.entity.Account;
+import com.lefince.entity.Finace;
+import java.util.List;
 
+/**
+ *
+ */
 public interface FinaceService {
 
-    boolean deleteByPrimaryKey(Integer accountId);
+    boolean deleteByPrimaryKey(Integer finaceId);
 
-    boolean insert(Account record);
+    boolean insert(Finace record);
 
-    int insertSelective(Account record);
+    int insertSelective(Finace record);
 
-    Account selectByPrimaryKey(Integer areaId);
+    Finace selectByPrimaryKey(Integer finaceId);
 
-    boolean updateByPrimaryKeySelective(Account record);
+    boolean updateByPrimaryKeySelective(Finace record);
 
-    int updateByPrimaryKey(Account record);
+    //int updateByPrimaryKey(Finace record);
 
-    /*
-    List<TbArea> queryArea();
-    */
+
+    List<Finace> queryFinace(Integer accountId);
+
 }
