@@ -49,41 +49,43 @@ public class AccountController {
     }
 
     /**
-     * 添加area
-     * @param area
+     * 添加account
+     * @param account
      * @return
      */
     @RequestMapping(value = "/addarea",method = RequestMethod.POST)
-    private Map<String, Object> addArea(@RequestBody Account area) {
+    private Map<String, Object> addArea(@RequestBody Account account) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        boolean isSuccess = accountService.insert(area);
+        boolean isSuccess = accountService.insert(account);
         modelMap.put("success", isSuccess);
         return modelMap;
     }
 
     /**
      * 修改
-     * @param area
+     * @param account
      * @return
      */
     @RequestMapping(value = "/modifyarea",method = RequestMethod.POST)
-    private Map<String, Object> modifyArea(@RequestBody Account area) {
+    private Map<String, Object> modifyArea(@RequestBody Account account) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
-        boolean b = accountService.updateByPrimaryKeySelective(area);
+        boolean b = accountService.updateByPrimaryKeySelective(account);
         modelMap.put("success", b);
         return modelMap;
     }
+
 
     /**
      * 删除area
      * @param areaId
      * @return
      */
+    /*
     @RequestMapping(value = "/removearea",method = RequestMethod.GET)
     private Map<String, Object> removeArea(Integer areaId) {
         Map<String, Object> modelMap = new HashMap<String, Object>();
         boolean isSuccess = accountService.deleteByPrimaryKey(areaId);
         modelMap.put("success", isSuccess);
         return modelMap;
-    }
+    }*/
 }
