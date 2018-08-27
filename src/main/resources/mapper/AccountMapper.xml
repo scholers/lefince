@@ -169,4 +169,11 @@
       update_time = now()
     where account_id = #{accountId,jdbcType=INTEGER}
   </update>
+
+  <select id="queryAccountByOperId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from account
+    where wechart_id = #{wechartId,jdbcType=VARCHAR}
+  </select>
 </mapper>

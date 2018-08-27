@@ -73,4 +73,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
+    @Override
+    public Account queryAccountByOpId(String opId) {
+        return accountMapper.queryAccountByOperId(opId);
+
+    }
+
+
 }

@@ -17,4 +17,6 @@ public interface AccountService {
 
     int updateByPrimaryKey(Account record);
 
+    Account queryAccountByOpId(String opId);
+
 }
