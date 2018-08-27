@@ -20,7 +20,7 @@ public class LoginController {
         @RequestMapping(value = "/querymoney",method = RequestMethod.GET)
         private Map<String, Object> login(String appid, String secret,String js_code,String grant_type) {
             Map<String, Object> modelMap = new HashMap<String, Object>();
-            // TODO: 2018/8/22  
+            // TODO: 2018/8/22
             //List<Finace> areas = finaceService.queryFinace(userId);
             //modelMap.put("areaList", areas);
             return modelMap;
