@@ -1,6 +1,7 @@
 package com.lefince.dao;
 
 import com.lefince.entity.Finace;
+
 import java.util.List;
 
 public interface FinaceMapper {
@@ -14,6 +15,7 @@ public interface FinaceMapper {
 
     int updateByPrimaryKeySelective(Finace record);
 
+    int updateByPrimaryKey(Finace record);
 
     List<Finace> queryFinace(Integer accountId);
 

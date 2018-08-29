@@ -19,67 +19,71 @@ import java.util.UUID;
 /**
  * 登录服务入口
  * code:loginRes.code,//临时登录凭证
- *     rawData:infoRes.rawData,//用户非敏感信息
- *     signature:infoRes.signature,//签名
- *     encrypteData:infoRes.encryptedData,//用户敏感信息
- *     iv:infoRes.iv//解密算法的向量
+ * rawData:infoRes.rawData,//用户非敏感信息
+ * signature:infoRes.signature,//签名
+ * encrypteData:infoRes.encryptedData,//用户敏感信息
+ * iv:infoRes.iv//解密算法的向量
  */
 public class LoginController {
-         Logger log = LoggerFactory.getLogger(WXAppletUserInfo.class);
+    Logger log = LoggerFactory.getLogger(WXAppletUserInfo.class);
 
-        @Autowired
-        private AccountService accountService;
-
-        /**
-         * 列表查询
-         * @return
-         */
-        @RequestMapping(value = "/login",method = RequestMethod.GET)
-        private Map<String, Object> login(String appid, String secret,String js_code,String grant_type) {
-            Map<String, Object> modelMap = new HashMap<String, Object>();
-            // TODO: 2018/8/22
-            //List<Finace> areas = finaceService.queryFinace(userId);
-            //modelMap.put("areaList", areas);
-            //WXAppletUserInfo.getSessionKeyOropenid();
-            return modelMap;
-        }
+    @Autowired
+    private AccountService accountService;
 
 
-    public Map<String,Object> doLogin(
-                                      @RequestParam(value = "code",required = false) String code,
-                                      @RequestParam(value = "rawData",required = false) String rawData,
-                                      @RequestParam(value = "signature",required = false) String signature,
-                                      @RequestParam(value = "encrypteData",required = false) String encrypteData,
-                                      @RequestParam(value = "iv",required = false) String iv){
-        log.info( "Start get SessionKey" );
+    /**
+     *
+     * @param code
+     * @param rawData
+     * @param signature
+     * @param encrypteData
+     * @param iv
+     * @return
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public Map<String, Object> doLogin(
+            @RequestParam(value = "code", required = false) String code,
+            @RequestParam(value = "rawData", required = false) String rawData,
+            @RequestParam(value = "signature", required = false) String signature,
+            @RequestParam(value = "encrypteData", required = false) String encrypteData,
+            @RequestParam(value = "iv", required = false) String iv) {
+        log.info("Start get SessionKey");
 
 
-        Map<String,Object> map = new HashMap<String, Object>(  );
-        System.out.println("用户非敏感信息"+rawData);
+        Map<String, Object> map = new HashMap<String, Object>();
+        System.out.println("用户非敏感信息" + rawData);
 
-        JSONObject rawDataJson = JSON.parseObject( rawData );
+        JSONObject rawDataJson = JSON.parseObject(rawData);
 
-        System.out.println("签名"+signature);
-        JSONObject SessionKeyOpenId = WXAppletUserInfo.getSessionKeyOropenid( code );
-        System.out.println("post请求获取的SessionAndopenId="+SessionKeyOpenId);
+        System.out.println("签名" + signature);
+        JSONObject SessionKeyOpenId = WXAppletUserInfo.getSessionKeyOropenid(code);
+        System.out.println("post请求获取的SessionAndopenId=" + SessionKeyOpenId);
 
-        String openid = SessionKeyOpenId.getString("openid" );
+        String openid = SessionKeyOpenId.getString("openid");
 
-        String sessionKey = SessionKeyOpenId.getString( "session_key" );
+        String sessionKey = SessionKeyOpenId.getString("session_key");
 
-        System.out.println("openid="+openid+",session_key="+sessionKey);
+        System.out.println("openid=" + openid + ",session_key=" + sessionKey);
 
         Account account = accountService.queryAccountByOpId(openid);
         //uuid生成唯一key
         String skey = UUID.randomUUID().toString();
-        if(account == null){
+        if (account == null) {
+
             //入库
-            String nickName = rawDataJson.getString( "nickName" );
-            String avatarUrl = rawDataJson.getString( "avatarUrl" );
-            String gender  = rawDataJson.getString( "gender" );
-            String city = rawDataJson.getString( "city" );
-            String country = rawDataJson.getString( "country" );
-            String province = rawDataJson.getString( "province" );
+            String nickName = rawDataJson.getString("nickName");
+            String avatarUrl = rawDataJson.getString("avatarUrl");
+            String gender = rawDataJson.getString("gender");
+            String city = rawDataJson.getString("city");
+            String country = rawDataJson.getString("country");
+            String province = rawDataJson.getString("province");
+            String phone = rawDataJson.getString("phone");
+
+            account = new Account();
+            account.setWechartId(openid);
+            account.setCnname(nickName);
+            account.setPhone(phone);
+            //account.setCreateTime();
 
             /*
 
@@ -97,9 +101,9 @@ public class LoginController {
 
             userService.insert( user );
             */
-        }else {
+        } else {
             //已存在
-            log.info( "用户openid已存在,不需要插入" );
+            log.info("用户openid已存在,不需要插入");
         }
         //根据openid查询skey是否存在
          /*
@@ -119,15 +123,15 @@ public class LoginController {
         */
 
         //把新的sessionKey和oppenid返回给小程序
-        map.put( "skey",skey );
+        map.put("skey", skey);
 
-        map.put( "result","0" );
+        map.put("result", "0");
 
 
         JSONObject userInfo = null;//getUserInfo( encrypteData, sessionKey, iv );
-        System.out.println("根据解密算法获取的userInfo="+userInfo);
+        System.out.println("根据解密算法获取的userInfo=" + userInfo);
         //userInfo.put( "balance",user.getUbalance() );
-        map.put( "userInfo",userInfo );
+        map.put("userInfo", userInfo);
 
         return map;
     }
