@@ -47,6 +47,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
+        <!--
         <table  tableName="account" domainObjectName="Account"
                 enableInsert="true" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" selectByExampleQueryId="false" />
@@ -56,6 +57,12 @@
                 enableSelectByExample="false" selectByExampleQueryId="false" />
 
         <table  tableName="finacetype" domainObjectName="FinaceType"
+                enableInsert="true" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+                enableSelectByExample="false" selectByExampleQueryId="false" />
+
+                -->
+
+        <table  tableName="subscription" domainObjectName="Subscription"
                 enableInsert="true" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
                 enableSelectByExample="false" selectByExampleQueryId="false" />
     </context>
